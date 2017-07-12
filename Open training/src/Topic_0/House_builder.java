@@ -2,17 +2,17 @@ package Topic_0;
 
 public interface House_builder {
 
-	public void buildFoundation();
+	House getHouse();
 
-	public void buildRooms();
+	House_builder buildFoundation(int area);
 
-	public void buildEntryPoints();
+	House_builder buildRooms(int rooms);
 
-	public void buildWindows();
+	House_builder buildEntryPoints(int entryPoints);
 
-	public void buildFloor();
+	House_builder buildWindows(int windows);
 
-	public void buildServices();
+	House_builder buildFloor(int floor);
 
-	public House getHouse();
+	House_builder buildServices(Boolean services);
 }

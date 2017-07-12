@@ -9,33 +9,39 @@ public class House_concrete_builder implements House_builder {
 	}
 
 	@Override
-	public void buildFoundation() {
-		house.setSquare_foundation_area(250);
+	public House_builder buildFoundation(int area) {
+		house.setSquare_foundation_area(area);
+		return this;
 	}
 
 	@Override
-	public void buildRooms() {
-		house.setRooms(4);
+	public House_builder buildRooms(int rooms) {
+		house.setRooms(rooms);
+		return this;
 	}
 
 	@Override
-	public void buildEntryPoints() {
-		house.setEntry_points(2);
+	public House_builder buildEntryPoints(int entryPoints) {
+		house.setEntry_points(entryPoints);
+		return this;
 	}
 
 	@Override
-	public void buildWindows() {
-		house.setWindows(10);
+	public House_builder buildWindows(int windows) {
+		house.setWindows(windows);
+		return this;
 	}
 
 	@Override
-	public void buildFloor() {
-		house.setFloor(2);
+	public House_builder buildFloor(int floor) {
+		house.setFloor(floor);
+		return this;
 	}
 
 	@Override
-	public void buildServices() {
-		house.setServices(true);
+	public House_builder buildServices(Boolean services) {
+		house.setServices(services);
+		return this;
 	}
 
 	@Override
