@@ -4,7 +4,7 @@ public interface ItemBuilder {
 
 	Item  getItem();
 	
-	ItemBuilder buildPrice(int price);
+	ItemBuilder buildPrice(double price);
 	
 	ItemBuilder buildName(String name);
 }

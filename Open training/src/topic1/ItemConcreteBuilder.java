@@ -3,6 +3,10 @@ package topic1;
 public class ItemConcreteBuilder implements ItemBuilder{
 
 	private Item item;
+	ItemConcreteBuilder (){
+		Item item = new Item();
+		this.item = item;
+	}
 	@Override
 	public Item getItem() {
 
@@ -10,7 +14,7 @@ public class ItemConcreteBuilder implements ItemBuilder{
 	}
 
 	@Override
-	public ItemBuilder buildPrice(int price) {
+	public ItemBuilder buildPrice(double price) {
 		
 		item.setPrice(price);
 		return this;

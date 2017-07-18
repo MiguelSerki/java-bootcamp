@@ -2,14 +2,14 @@ package topic1;
 
 public class Item {
 
-	private int price;
+	private double price;
 	private String name;
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
@@ -20,5 +20,8 @@ public class Item {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	public Item getItem () {
+		return this;
+	}
 }

@@ -1,5 +1,7 @@
 package topic1;
 
-public class MethodOfPayment {
+public interface MethodOfPayment {
+
+	void purchase(double money, User user);
 
 }

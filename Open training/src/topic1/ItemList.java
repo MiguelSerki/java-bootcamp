@@ -2,7 +2,8 @@ package topic1;
 
 import java.util.ArrayList;
 
-public class ItemList {
+@SuppressWarnings("serial")
+public class ItemList extends ArrayList<Item> {
 
 	private ArrayList<Item> itemList;
 
@@ -14,12 +15,20 @@ public class ItemList {
 		itemList.add(item);
 	}
 
-	public void returnItem(ItemList itemList) {
-
+	public void subtractItemFromList(Item item) {
+		itemList.remove(item);
 	}
 
-	public int sumAllItems(ArrayList<Item> itemList) {
-		int totalPrice = 0;
+	public Item returnItem(ItemList itemList, String name) {
+		int i = 0;
+		while (itemList.get(i).getName() != name) {
+			i++;
+		}
+		return itemList.get(i);
+	}
+
+	public double sumAllItems(ArrayList<Item> itemList) {
+		double totalPrice = 0;
 		for (int i = 0; i < itemList.size(); i++) {
 			totalPrice = totalPrice + itemList.get(i).getPrice();
 		}
