@@ -12,13 +12,13 @@ public class Demo {
 		shoppingCart.userSubstractsItemFromHisCart(user, shoppingCart.getCartItemList(), 02);
 		shoppingCart.userAddsItemToHisCart(user, shoppingCart.getCartItemList(), 03);
 		System.out.println("your cart cost: " + user.getCart().sumAllItems(user.getCart()));
-		shoppingCart.userPaysWithCash(user);
+		// shoppingCart.userPaysWithCash(user);
 		// shoppingCart.userPaysWithCreditCard(user, "Juan", 777);
-		// shoppingCart.userPaysWithPaypal(user, "aloha@gmail.com", "password");
+		shoppingCart.userPaysWithPaypal(user, "aloha@gmail.com", "password");
 		shoppingCart.userConfirmsThePurchase(user, shoppingCart.getCartItemList());
 		System.out.println(user.getMoney());
-		System.out.println("your cart cost: " + user.getCart().sumAllItems(user.getCart()));
 		shoppingCart.userAddsItemToHisCart(user, shoppingCart.getCartItemList(), 01);
+		System.out.println("your cart cost: " + user.getCart().sumAllItems(user.getCart()));
 		shoppingCart.userPaysWithPaypal(user, "aloha@gmail.com", "password");
 		shoppingCart.userConfirmsThePurchase(user, shoppingCart.getCartItemList());
 		System.out.println(user.getMoney());
