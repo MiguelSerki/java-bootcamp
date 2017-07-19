@@ -88,12 +88,17 @@ public class ShoppingCart {
 		PaypalStrategy method = new PaypalStrategy(email, password);
 		user.setMethodOfPayment(method);
 	}
+	
+	//display the shopping cart list
+	public void displayShoppingCartList () {
+		this.cartItemList.displayList(cartItemList);
+	}
 
 	// the user confirms he wants to purchase. We check if the cart is empty
 	// If it's not, we then check if the user has enough money in his account
 	// if the user does, we must provide a valid method of payment
 	// then we empty his cart.
-	public void userConfirmsThePurchase(User user, ItemList itemList) {
+ 	public void userConfirmsThePurchase(User user, ItemList itemList) {
 		if (user.getCart().isEmpty()) {
 			System.out.println("Your chart is empty");
 

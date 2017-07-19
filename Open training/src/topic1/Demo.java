@@ -6,6 +6,7 @@ public class Demo {
 
 		ShoppingCart shoppingCart = new ShoppingCart();
 		User user = new User(2500);
+		shoppingCart.displayShoppingCartList();
 		System.out.println(user.getMoney());
 		shoppingCart.userAddsItemToHisCart(user, shoppingCart.getCartItemList(), 01);
 		shoppingCart.userAddsItemToHisCart(user, shoppingCart.getCartItemList(), 02);
