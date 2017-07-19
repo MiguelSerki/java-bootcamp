@@ -6,66 +6,102 @@ public class ShoppingCart {
 
 	private ItemList cartItemList;
 
+	public ShoppingCart() {
+		ItemList list = new ItemList();
+		setItemList(list);
+		this.cartItemList = list;
+		cartItemList.trimToSize();
+	}
+
 	public ItemList getCartItemList() {
-		return cartItemList;
+		return this.cartItemList;
 	}
 
 	public void setCartItemList(ItemList cartItemList) {
 		this.cartItemList = cartItemList;
 	}
 
+	// takes an item list and adds the specified items to it.
 	public void setItemList(ItemList itemList) {
 
-		Item item = new ItemConcreteBuilder().buildName("Coke")//
+		ItemConcreteBuilder itemBuilder = new ItemConcreteBuilder();
+
+		Item item = itemBuilder.buildName("Coke")//
 				.buildPrice(20)//
+				.buildId(01)//
 				.getItem();
 
-		itemList.addToItemList(item);
+		itemList.add(item);
+		// itemList.addToItemList(item);
 
 		item = new ItemConcreteBuilder().buildName("Computer")//
 				.buildPrice(1500)//
+				.buildId(02)//
 				.getItem();
 
-		itemList.addToItemList(item.getItem());
+		itemList.add(item);
 
 		item = new ItemConcreteBuilder().buildName("Sofa")//
 				.buildPrice(500)//
+				.buildId(03)//
 				.getItem();
 
-		itemList.addToItemList(item.getItem());
-
-		this.setCartItemList(itemList);
+		itemList.add(item);
 	}
 
-	public void userAddsItemToHisCart(User user, ItemList itemList, String name) {
-		user.addItemToCart(user.getCart().returnItem(itemList, name));
+	// takes an user, and it adds to his personal cart an item from itemList
+	// with the specific ID.
+	public void userAddsItemToHisCart(User user, ItemList itemList, int id) {
+		user.addItemToCart(itemList.returnItem(itemList, id));
 	}
 
-	public void userSubstractsItemFromHisCart(User user, ItemList itemList, String name) {
-		user.subtractItemFromCart(user.getCart().returnItem(itemList, name));
+	// takes an user, and it takes out from his personal cart an item from
+	// itemList with the specific ID.
+	public void userSubstractsItemFromHisCart(User user, ItemList itemList, int id) {
+		user.subtractItemFromCart(user.getCart().returnItem(itemList, id));
 	}
 
+	// after a purchase, we empty the cart of the user.
 	public void userHasPurchasedAndNowWeEmptyHisCart(User user) {
-		int i = 0;
-		while (user.getCart().isEmpty() == false) {
-			user.subtractItemFromCart(user.getCart().get(i));
-			i++;
-		}
+		user.getCart().clear();
 	}
 
-	public void userConfirmsThePurchase(User user, ItemList itemList, MethodOfPayment methodOfPayment) {
-		if (user.getCart() == null) {
+	// returns the total cost of an item list.
+	public double totalCostOfCart(ItemList itemList) {
+		return itemList.sumAllItems(itemList);
+	}
+
+	// three strategies of payment.
+	public void userPaysWithCash(User user) {
+		CashStrategy method = new CashStrategy();
+		user.setMethodOfPayment(method);
+	}
+
+	public void userPaysWithCreditCard(User user, String name, int accountNumber) {
+		CreditCardStrategy method = new CreditCardStrategy(name, accountNumber);
+		user.setMethodOfPayment(method);
+	}
+
+	public void userPaysWithPaypal(User user, String email, String password) {
+		PaypalStrategy method = new PaypalStrategy(email, password);
+		user.setMethodOfPayment(method);
+	}
+
+	// the user confirms he wants to purchase. We check if the cart is empty
+	// If it's not, we then check if the user has enough money in his account
+	// if the user does, we must provide a valid method of payment
+	// then we empty his cart.
+	public void userConfirmsThePurchase(User user, ItemList itemList) {
+		if (user.getCart().isEmpty()) {
 			System.out.println("Your chart is empty");
 
 		} else {
-			if (user.confirmPurchase(itemList, user.getMoney())) {
-				user.setMethodOfPayment(methodOfPayment);
-				user.getMethodOfPayment().purchase(user.getMoney(), user);
+			if (user.confirmPurchase(user.getCart(), user.getMoney())) {
+				user.getMethodOfPayment().purchase(user.getCart().sumAllItems(user.getCart()), user);
 				userHasPurchasedAndNowWeEmptyHisCart(user);
 			} else {
-				System.out.println("You don't have enough money in your account for this transaction.");
+				System.out.println("Please add more money to your account before proceding.");
 			}
 		}
 	}
-
 }

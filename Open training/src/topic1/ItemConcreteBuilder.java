@@ -1,11 +1,11 @@
 package topic1;
 
-public class ItemConcreteBuilder implements ItemBuilder{
+public class ItemConcreteBuilder implements ItemBuilder {
 
 	private Item item;
-	ItemConcreteBuilder (){
-		Item item = new Item();
-		this.item = item;
+
+	public ItemConcreteBuilder () {
+		item = new Item();
 	}
 	@Override
 	public Item getItem() {
@@ -15,7 +15,7 @@ public class ItemConcreteBuilder implements ItemBuilder{
 
 	@Override
 	public ItemBuilder buildPrice(double price) {
-		
+
 		item.setPrice(price);
 		return this;
 	}
@@ -24,6 +24,11 @@ public class ItemConcreteBuilder implements ItemBuilder{
 	public ItemBuilder buildName(String name) {
 
 		item.setName(name);
+		return this;
+	}
+	@Override
+	public ItemBuilder buildId(int id) {
+		item.setId(id);
 		return this;
 	}
 

@@ -7,27 +7,31 @@ public class ItemList extends ArrayList<Item> {
 
 	private ArrayList<Item> itemList;
 
-	public ArrayList<Item> getItemList() {
-		return itemList;
+	public ItemList() {
+		itemList = new ArrayList<Item>();
 	}
 
-	public void addToItemList(Item item) {
-		itemList.add(item);
+	public ArrayList<Item> getItemList() {
+		return itemList;
 	}
 
 	public void subtractItemFromList(Item item) {
 		itemList.remove(item);
 	}
 
-	public Item returnItem(ItemList itemList, String name) {
+	public Item returnItem(ItemList itemList, int id) {
 		int i = 0;
-		while (itemList.get(i).getName() != name) {
-			i++;
+		for (int a = 0; a < itemList.size(); a++) {
+			if (itemList.get(a).getId() == id) {
+				return itemList.get(i);
+			} else {
+				i++;
+			}
 		}
 		return itemList.get(i);
 	}
 
-	public double sumAllItems(ArrayList<Item> itemList) {
+	public double sumAllItems(ItemList itemList) {
 		double totalPrice = 0;
 		for (int i = 0; i < itemList.size(); i++) {
 			totalPrice = totalPrice + itemList.get(i).getPrice();

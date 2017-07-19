@@ -8,6 +8,7 @@ public class User {
 
 	public User(double money) {
 		this.money = money;
+		cart = new ItemList();
 	}
 
 	public double getMoney() {
@@ -35,11 +36,11 @@ public class User {
 	}
 
 	public void addItemToCart(Item item) {
-		cart.addToItemList(item);
+		cart.add(item);
 	}
 
 	public void subtractItemFromCart(Item item) {
-		this.cart.subtractItemFromList(item);
+		cart.remove(item);
 	}
 
 	public MethodOfPayment getMethodOfPayment() {

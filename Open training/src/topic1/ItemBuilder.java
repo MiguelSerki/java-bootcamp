@@ -7,4 +7,6 @@ public interface ItemBuilder {
 	ItemBuilder buildPrice(double price);
 	
 	ItemBuilder buildName(String name);
+	
+	ItemBuilder buildId (int id);
 }

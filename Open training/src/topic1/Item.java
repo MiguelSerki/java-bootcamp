@@ -4,6 +4,7 @@ public class Item {
 
 	private double price;
 	private String name;
+	private int id;
 
 	public double getPrice() {
 		return price;
@@ -23,5 +24,13 @@ public class Item {
 	
 	public Item getItem () {
 		return this;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

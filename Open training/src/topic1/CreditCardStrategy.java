@@ -16,7 +16,7 @@ public class CreditCardStrategy implements MethodOfPayment {
 			System.out.println("You must provide a name and a credit card number to procede");
 		} else {
 			user.payMoney(money);
-			System.out.println("You payed " + money + " with credit card.");
+			System.out.println("User paid " + money + " with credit card.");
 		}
 	}
 
