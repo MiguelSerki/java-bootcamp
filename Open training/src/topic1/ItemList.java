@@ -40,9 +40,9 @@ public class ItemList extends ArrayList<Item> {
 
 	}
 
-	public void displayList (ItemList itemList) {
+	public void displayList(ItemList itemList) {
 		for (int i = 0; i < itemList.size(); i++) {
-			System.out.println(itemList.get(i).getName()+ "....$" + itemList.get(i).getPrice() );
+			System.out.println(itemList.get(i).getName() + "....$" + itemList.get(i).getPrice());
 		}
 	}
 }

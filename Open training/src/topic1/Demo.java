@@ -23,6 +23,11 @@ public class Demo {
 		shoppingCart.userPaysWithPaypal(user, "aloha@gmail.com", "password");
 		shoppingCart.userConfirmsThePurchase(user, shoppingCart.getCartItemList());
 		System.out.println(user.getMoney());
-
+		OfferComposite offer = new OfferComposite("Super Offer!", 1000);
+		OfferComposite offer2 = new OfferComposite("Mini Offer", 500);
+		shoppingCart.createOffer(offer);
+		shoppingCart.createOffer(offer2);
+		offer.showOffer();
+		offer2.showOffer();
 	}
 }

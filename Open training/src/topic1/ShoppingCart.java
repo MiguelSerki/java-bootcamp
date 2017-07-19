@@ -51,6 +51,34 @@ public class ShoppingCart {
 		itemList.add(item);
 	}
 
+	public void createOffer(OfferComposite offer) {
+
+		OfferLeaf leaf1 = new OfferLeaf();
+		OfferLeaf leaf2 = new OfferLeaf();
+
+		ItemConcreteBuilder itemBuilder = new ItemConcreteBuilder();
+		Item item = itemBuilder.buildName("Coke")//
+				.buildPrice(20)//
+				.buildId(01)//
+				.getItem();
+		leaf1.getOfferList().add(item);
+
+		item = new ItemConcreteBuilder().buildName("Sofa")//
+				.buildPrice(500)//
+				.buildId(03)//
+				.getItem();
+		leaf1.getOfferList().add(item);
+
+		item = new ItemConcreteBuilder().buildName("Computer")//
+				.buildPrice(1500)//
+				.buildId(02)//
+				.getItem();
+		leaf2.getOfferList().add(item);
+
+		offer.addOffer(leaf1);
+		offer.addOffer(leaf2);
+	}
+
 	// takes an user, and it adds to his personal cart an item from itemList
 	// with the specific ID.
 	public void userAddsItemToHisCart(User user, ItemList itemList, int id) {
@@ -88,9 +116,9 @@ public class ShoppingCart {
 		PaypalStrategy method = new PaypalStrategy(email, password);
 		user.setMethodOfPayment(method);
 	}
-	
-	//display the shopping cart list
-	public void displayShoppingCartList () {
+
+	// display the shopping cart list
+	public void displayShoppingCartList() {
 		this.cartItemList.displayList(cartItemList);
 	}
 
@@ -98,7 +126,7 @@ public class ShoppingCart {
 	// If it's not, we then check if the user has enough money in his account
 	// if the user does, we must provide a valid method of payment
 	// then we empty his cart.
- 	public void userConfirmsThePurchase(User user, ItemList itemList) {
+	public void userConfirmsThePurchase(User user, ItemList itemList) {
 		if (user.getCart().isEmpty()) {
 			System.out.println("Your chart is empty");
 
