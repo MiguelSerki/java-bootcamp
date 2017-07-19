@@ -5,12 +5,14 @@ package topic1;
 public class ShoppingCart {
 
 	private ItemList cartItemList;
+	private Counter transactionCounter;
 
 	public ShoppingCart() {
 		ItemList list = new ItemList();
 		setItemList(list);
 		this.cartItemList = list;
 		cartItemList.trimToSize();
+		transactionCounter = Counter.getInstance();
 	}
 
 	public ItemList getCartItemList() {
@@ -98,6 +100,7 @@ public class ShoppingCart {
 		} else {
 			if (user.confirmPurchase(user.getCart(), user.getMoney())) {
 				user.getMethodOfPayment().purchase(user.getCart().sumAllItems(user.getCart()), user);
+				System.out.println("Your purchase ID is " + this.transactionCounter.getTransaction());
 				userHasPurchasedAndNowWeEmptyHisCart(user);
 			} else {
 				System.out.println("Please add more money to your account before proceding.");
