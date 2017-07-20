@@ -4,9 +4,10 @@ public class ItemConcreteBuilder implements ItemBuilder {
 
 	private Item item;
 
-	public ItemConcreteBuilder () {
+	public ItemConcreteBuilder() {
 		item = new Item();
 	}
+
 	@Override
 	public Item getItem() {
 
@@ -14,9 +15,10 @@ public class ItemConcreteBuilder implements ItemBuilder {
 	}
 
 	@Override
-	public ItemBuilder buildPrice(double price) {
-
+	public ItemBuilder buildPrice(double price, ShoppingCart shoppingCart) {
 		item.setPrice(price);
+		shoppingCart.priceChangeEmail();
+		shoppingCart.getMailStation().sendEmail(shoppingCart.getEmail());
 		return this;
 	}
 
@@ -26,6 +28,7 @@ public class ItemConcreteBuilder implements ItemBuilder {
 		item.setName(name);
 		return this;
 	}
+
 	@Override
 	public ItemBuilder buildId(int id) {
 		item.setId(id);

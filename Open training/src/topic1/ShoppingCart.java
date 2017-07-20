@@ -6,12 +6,16 @@ public class ShoppingCart {
 
 	private ItemList cartItemList;
 	private Counter transactionCounter;
-
+	private MailStation mailStation;
+	private Email email;
+	
 	public ShoppingCart() {
+		MailStation mailStation = new MailStation ();
+		this.mailStation = mailStation;
+		Email email = new Email ("Empty");
+		this.email = email;
 		ItemList list = new ItemList();
-		setItemList(list);
 		this.cartItemList = list;
-		cartItemList.trimToSize();
 		transactionCounter = Counter.getInstance();
 	}
 
@@ -29,54 +33,62 @@ public class ShoppingCart {
 		ItemConcreteBuilder itemBuilder = new ItemConcreteBuilder();
 
 		Item item = itemBuilder.buildName("Coke")//
-				.buildPrice(20)//
+				.buildPrice(20, this)//
 				.buildId(01)//
 				.getItem();
 
 		itemList.add(item);
-		// itemList.addToItemList(item);
+		this.itemOrOfferAddedEmail();
+		this.mailStation.sendEmail(email);
 
 		item = new ItemConcreteBuilder().buildName("Computer")//
-				.buildPrice(1500)//
+				.buildPrice(1500, this)//
 				.buildId(02)//
 				.getItem();
 
 		itemList.add(item);
+		this.itemOrOfferAddedEmail();
+		this.mailStation.sendEmail(email);
 
 		item = new ItemConcreteBuilder().buildName("Sofa")//
-				.buildPrice(500)//
+				.buildPrice(500, this)//
 				.buildId(03)//
 				.getItem();
 
 		itemList.add(item);
+		this.cartItemList.trimToSize();
+		this.itemOrOfferAddedEmail();
+		this.mailStation.sendEmail(email);
 	}
 
 	public void createOffer(OfferComposite offer) {
-
+		
 		OfferLeaf leaf1 = new OfferLeaf();
 		OfferLeaf leaf2 = new OfferLeaf();
 
 		ItemConcreteBuilder itemBuilder = new ItemConcreteBuilder();
 		Item item = itemBuilder.buildName("Coke")//
-				.buildPrice(20)//
+				.buildPrice(20, this)//
 				.buildId(01)//
 				.getItem();
 		leaf1.getOfferList().add(item);
 
 		item = new ItemConcreteBuilder().buildName("Sofa")//
-				.buildPrice(500)//
+				.buildPrice(500, this)//
 				.buildId(03)//
 				.getItem();
 		leaf1.getOfferList().add(item);
 
 		item = new ItemConcreteBuilder().buildName("Computer")//
-				.buildPrice(1500)//
+				.buildPrice(1500, this)//
 				.buildId(02)//
 				.getItem();
 		leaf2.getOfferList().add(item);
-
+		
 		offer.addOffer(leaf1);
 		offer.addOffer(leaf2);
+		this.itemOrOfferAddedEmail();
+		this.mailStation.sendEmail(email);
 	}
 
 	// takes an user, and it adds to his personal cart an item from itemList
@@ -134,10 +146,29 @@ public class ShoppingCart {
 			if (user.confirmPurchase(user.getCart(), user.getMoney())) {
 				user.getMethodOfPayment().purchase(user.getCart().sumAllItems(user.getCart()), user);
 				System.out.println("Your purchase ID is " + this.transactionCounter.getTransaction());
+				this.purchaseEmail();
+				this.mailStation.doNotify();
 				userHasPurchasedAndNowWeEmptyHisCart(user);
 			} else {
 				System.out.println("Please add more money to your account before proceding.");
 			}
 		}
 	}
+
+	public void priceChangeEmail () {
+		this.email.setEmail("A price has changed.");
+	}
+	public void itemOrOfferAddedEmail () {
+		this.email.setEmail("A new item or offer is available.");
+		}
+	public void purchaseEmail () {
+		this.email.setEmail("User has purchased something");
+	}
+	public MailStation getMailStation() {
+		return this.mailStation;
+	}
+	public Email getEmail() {
+		return this.email;
+	}
+
 }

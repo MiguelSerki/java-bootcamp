@@ -11,7 +11,7 @@ public class AudioPlayerDemo {
 		System.out.println(player.myState());
 		player.setState(new AudioStopState());
 		System.out.println(player.myState());
-		
+
 	}
 
 }

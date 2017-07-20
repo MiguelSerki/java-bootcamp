@@ -6,6 +6,9 @@ public class Demo {
 
 		ShoppingCart shoppingCart = new ShoppingCart();
 		User user = new User(2500);
+		MarketManager manager = new MarketManager();
+		shoppingCart.getMailStation().addObserver(manager);
+		shoppingCart.setItemList(shoppingCart.getCartItemList());
 		shoppingCart.displayShoppingCartList();
 		System.out.println(user.getMoney());
 		shoppingCart.userAddsItemToHisCart(user, shoppingCart.getCartItemList(), 01);
