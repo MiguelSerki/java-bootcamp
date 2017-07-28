@@ -6,7 +6,7 @@ import java.util.List;
 public class RecentFileList<recentInt> {
 
 	private RecentFile recentFile;
-	private ArrayList<RecentFile> list;
+	private List<RecentFile> list;
 
 	public RecentFileList() {
 		list = new ArrayList<RecentFile>(15);
@@ -23,13 +23,18 @@ public class RecentFileList<recentInt> {
 
 	public void setLastFileInList(RecentFile file) {
 
-		if (this.list.isEmpty() == false) {
+		if (this.list.isEmpty()) {
 			this.list.add(file);
 		} else {
+			if (list.contains(file)) {
+				list.remove(file);
+			}
+			if (list.size()==15) {
+				list.remove(0);
+			}
 			this.list.add(file);
+			}
 		}
-
-	}
 
 	public void open(RecentFile file) {
 		this.recentFile = file;

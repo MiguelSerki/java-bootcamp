@@ -1,8 +1,9 @@
-package topic3;
+package topic3.exercise4;
 
 import static org.junit.Assert.*;
 
-import org.junit.Ignore;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 
 public class _RomanConversion {
@@ -11,18 +12,42 @@ public class _RomanConversion {
 	public void test1toI() {
 	
 		Arabic arabic = new Arabic(1);
-		Roman roman = new Roman (arabic.convertToRoman());
-		assertEquals ("I", arabic.convertToRoman());
+		List<String> romans = new ArrayList<String>();
+		romans.add("I");
+		assertEquals (romans, arabic.getRoman());
 	}
 
 	@Test
-	public void test2toII() {
-		Arabic arabic = new Arabic(2);
-		assertEquals ("II", arabic.convertToRoman());
+	public void test7() {
+		Arabic arabic = new Arabic(7);
+		List<String> romans = new ArrayList<String>();
+		romans.add("V");
+		romans.add("I");
+		romans.add("I");
+		assertEquals (romans, arabic.getRoman());
 	}
 	@Test
-	public void test3toIII() {
-		Arabic arabic = new Arabic(3);
-		assertEquals ("III", arabic.convertToRoman());
+	public void test19() {
+		Arabic arabic = new Arabic(19);
+		List<String> romans = new ArrayList<String>();
+		romans.add("X");
+		romans.add("V");
+		romans.add("I");
+		romans.add("I");
+		romans.add("I");
+		romans.add("I");
+		assertEquals (romans, arabic.getRoman());
+	}
+	@Test
+	public void test1256() {
+		Arabic arabic = new Arabic(1256);
+		List<String> romans = new ArrayList<String>();
+		romans.add("M");
+		romans.add("C");
+		romans.add("C");
+		romans.add("L");
+		romans.add("V");
+		romans.add("I");
+		assertEquals (romans, arabic.getRoman());
 	}
 }

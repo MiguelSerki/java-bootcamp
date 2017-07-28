@@ -3,6 +3,7 @@ package topic3.exercise3;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -86,7 +87,7 @@ public class _RecentFileListBehaviourTest {
 	public void viewListOfFilesOpenedTest() {
 
 		RecentFileList recentFile = new RecentFileList();
-		ArrayList<RecentFile> list = new ArrayList<RecentFile>();
+		List<RecentFile> list = new ArrayList<RecentFile>();
 		
 		RecentFile file = new RecentFile(1);
 		recentFile.open(file);
@@ -110,12 +111,15 @@ public class _RecentFileListBehaviourTest {
 		recentFile.open(file7);
 		list.add(file7);
 		recentFile.open(file);
+		list.remove(file);
 		list.add(file);
 		recentFile.open(file3);
+		list.remove(file3);
 		list.add(file3);
 		recentFile.open(file4);
+		list.remove(file4);
 		list.add(file4);
-		assertEquals(list.toString(), recentFile.getList().toString());
+		assertEquals(list.get(0).getData(), ((List<RecentFile>) recentFile.getList()).get(0).getData());
 	}
 	
 
